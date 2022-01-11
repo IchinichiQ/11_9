@@ -22,13 +22,15 @@ public class Main {
     public static String markLengthOfWords(String input) {
         Pattern pattern = Pattern.compile("([А-Яа-яa-zA-Z0-9]+)");
         List<String> matches = new ArrayList<String>();
+        StringBuffer result = new StringBuffer();
         Matcher m = pattern.matcher(input);
-        while (m.find())
-            matches.add(m.group());
+        while (m.find()) {
+            m.appendReplacement(result, m.group() + "(" + m.group().length() + ")");
+//            String match = m.group();
+//            input = input.replace(match, match + "(" + match.length() + ")");
+        }
+        m.appendTail(result);
 
-        for (String match : matches)
-            input = input.replace(match, match + "(" + match.length() + ")");
-
-        return input;
+        return result.toString();
     }
 }
