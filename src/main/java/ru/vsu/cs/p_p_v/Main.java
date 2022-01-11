@@ -8,6 +8,13 @@ import java.util.regex.*;
 
 public class Main {
 
+/*    Обработать текст следующим образом: в конце каждого слова приписать в скобках
+      длину данного слова. Словом считается непрерывная последовательность символов
+      (строчных и прописных) А-Я, A-Z и цифр. Например, в результате обработки текста
+      "Придумайте сложный пароль вида Az12-67$AF2" должен получиться текст
+      "Придумайте(10) сложный(7) пароль(6) вида(4) Az12(4)-67(2)$AF2(3)".
+ */
+
     public static void main(String[] args) {
         System.out.print("Введите предложение: ");
 
@@ -22,7 +29,7 @@ public class Main {
     public static String markLengthOfWords(String input) {
         Pattern pattern = Pattern.compile("([А-Яа-яa-zA-Z0-9]+)");
         List<String> matches = new ArrayList<String>();
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         Matcher m = pattern.matcher(input);
         while (m.find()) {
             m.appendReplacement(result, m.group() + "(" + m.group().length() + ")");
